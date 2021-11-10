@@ -1,6 +1,7 @@
 package com.test.jasypt.controller;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.test.jasypt.EncryptedConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,15 +9,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RetrieveController {
 
-    @Value("${encrypted.property}")
-    private String property;
+    private EncryptedConfig encryptedConfig;
 
-    @Value("${encrypted.property2}")
-    private String property2;
+    @Autowired
+    public void setEncryptedConfig(EncryptedConfig encryptedConfig) {
+        this.encryptedConfig = encryptedConfig;
+    }
 
     @GetMapping(value = "/printEncryptedProp", produces = MediaType.TEXT_PLAIN_VALUE)
     public String printEncryptedProp() {
-        return "Encrypted pass prop1: " + property + ", prop2: " + property2;
+        return "Encrypted pass prop1: " + encryptedConfig.getProperty() + ", prop2: " + encryptedConfig.getProperty2();
     }
 
 }
