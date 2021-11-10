@@ -18,7 +18,7 @@ public class RetrieveController {
 
     @GetMapping(value = "/printEncryptedProp", produces = MediaType.TEXT_PLAIN_VALUE)
     public String printEncryptedProp() {
-        return "Encrypted pass prop1: " + encryptedConfig.getProperty() + ", prop2: " + encryptedConfig.getProperty2();
+        return "Decrypted prop1: " + encryptedConfig.getProperty() + ", prop2: " + encryptedConfig.getProperty2();
     }
 
 }
